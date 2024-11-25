@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- displays site properly based on user's device -->
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <title>Frontend Mentor | Calculator app</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+        .attribution {
+            font-size: 11px;
+            text-align: center;
+
+        }
+
+        .attribution a {
+            color: hsl(228, 45%, 44%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="theme-container">
+            <div class="logo">calc</div>
+            <div class="theme-control">
+                <div class="theme-title">Theme</div>
+                <div class="theme-buttons">
+                    <form action="">
+                        <div class="input-container">
+                            <label for="">1
+                                <div class="input-child-container input-start">
+                                    <input type="radio" name="theme" value="blue" class="custom-radio" checked>
+                                </div>
+                            </label>
+                            <label for="">2
+                                <div class="input-child-container input-middle">
+                                    <input type="radio" name="theme" value="light" class="custom-radio">
+                                </div>
+                            </label>
+                            <label for="">3
+                                <div class="input-child-container input-end">
+                                    <input type="radio" name="theme" value="navy" class="custom-radio">
+                                </div>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="output-container">
+            <div  class="previous-number" data-previous-operand></div>
+            <div  class="current-number" data-current-operand>0</div>
+        </div>
+        <div class="keys-container">
+            <div class="pale pale-number pale-1" data-number>1</div>
+            <div class="pale pale-number pale-2" data-number>2</div>
+            <div class="pale pale-number pale-3" data-number>3</div>
+            <div class="pale pale-number pale-4" data-number>4</div>
+            <div class="pale pale-number pale-5" data-number>5</div>
+            <div class="pale pale-number pale-6" data-number>6</div>
+            <div class="pale pale-number pale-7" data-number>7</div>
+            <div class="pale pale-number pale-8" data-number>8</div>
+            <div class="pale pale-number pale-9" data-number>9</div>
+            <div class="pale pale-number pale-zero" data-number>0</div>
+            <div class="pale pale-number pale-dot" data-number>.</div>
+            <div class="pale pale-number pale-devide" data-operations>/</div>
+            <div class="pale pale-number pale-multiply" data-operations>*</div>
+            <div class="pale pale-number pale-add" data-operations>+</div>
+            <div class="pale pale-number pale-subtract" data-operations>-</div>
+            <div class="set set-equals" data-equals>=</div>
+            <div class="sign sign-delete" data-delete>del</div>
+            <div class="sign sign-reset" data-reset>reset</div>
+        </div>
+    </div>
+
+
+    <div class="attribution">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+        Coded by <a href="#">Your Name Here</a>.
+    </div>
+
+</body>
+
+</html>

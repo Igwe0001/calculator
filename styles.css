@@ -1,0 +1,365 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Colors */
+
+  /* Theme 1 */
+
+  /* Backgrounds */
+
+  --main-background: hsl(222, 26%, 31%);
+  /* --Very-dark-desaturated-blue-main: hsl(222, 26%, 31%); */
+  --toggle-keypad-background: hsl(223, 31%, 20%);
+  /* --Very-dark-desaturated-blue-toggle: hsl(223, 31%, 20%); */
+  --screen-background: hsl(224, 36%, 15%);
+  /* --Very-dark-desaturated-blue-screen: hsl(224, 36%, 15%); */
+
+  /* Keys */
+
+  --key-set-background: hsl(225, 21%, 49%);
+  /* --Desaturated-dark-blue-background: hsl(225, 21%, 49%); */
+  --key-set-shadow: hsl(224, 28%, 35%);
+  /* --Desaturated-dark-blue-shadow: hsl(224, 28%, 35%); */
+
+  --key-toggle-background: hsl(6, 63%, 50%);
+  /* --Red-background: hsl(6, 63%, 50%); */
+  --key-toggle-shadow: hsl(6, 70%, 34%);
+  /* --Dark-red-shadow: hsl(6, 70%, 34%); */
+
+  --key-number-background: hsl(30, 25%, 89%);
+  /* --Light-grayish-orange-background: hsl(30, 25%, 89%); */
+  --key-number-shadow: hsl(28, 16%, 65%);
+  /* --Grayish-orange-shadow: hsl(28, 16%, 65%); */
+
+  --Text: hsl(0, 0%, 100%);
+
+  /* --Very-dark-grayish-blue-text: hsl(221, 14%, 31%); */
+  --White: hsl(0, 0%, 100%);
+}
+
+/* Dark theme */
+[data-theme="light"] {
+  /* Theme 2 */
+
+  /* Backgrounds */
+
+  --main-background: hsl(0, 0%, 90%);
+  /* --Light-gray-main: hsl(0, 0%, 90%); */
+  --toggle-keypad-background: hsl(0, 5%, 81%);
+  /* --Grayish-red-toggle: hsl(0, 5%, 81%); */
+  --screen-background: hsl(0, 0%, 93%);
+  /* --Very-light-gray-screen: hsl(0, 0%, 93%); */
+
+  /* Keys */
+
+  --key-set-background: hsl(185, 42%, 37%);
+  /* --Dark-moderate-cyan-background: hsl(185, 42%, 37%); */
+  --key-set-shadow: hsl(185, 58%, 25%);
+  /* --Very-dark-cyan-shadow: hsl(185, 58%, 25%); */
+
+  --key-toggle-background: hsl(25, 98%, 40%);
+  /* --Orange-background: hsl(25, 98%, 40%); */
+  --key-toggle-shadow: hsl(25, 99%, 27%);
+  /* --Dark-orange-shadow: hsl(25, 99%, 27%); */
+
+  --key-number-background: hsl(45, 7%, 89%);
+  /* --Light-grayish-yellow-background: hsl(45, 7%, 89%); */
+  --key-number-shadow: hsl(35, 11%, 61%);
+  /* --Dark-grayish-orange-shadow: hsl(35, 11%, 61%); */
+
+  --Text: hsl(60, 10%, 19%);
+
+  /* --Very-dark-grayish-yellow-text: hsl(60, 10%, 19%); */
+  /* (text) */
+  --White: hsl(0, 0%, 100%);
+}
+
+[data-theme="navy"] {
+  /* Theme 3 */
+
+  /* Backgrounds */
+
+  --main-background: hsl(268, 75%, 9%);
+  /* --Very-dark-violet-main: hsl(268, 75%, 9%); */
+  --toggle-keypad-background: hsl(268, 71%, 12%);
+  /* (toggle background, keypad background, screen background) */
+  --screen-background: hsl(268, 71%, 12%);
+  /* --Very-dark-violet-toggle: hsl(268, 71%, 12%); */
+
+  /* Keys */
+
+  --key-set-background: hsl(281, 89%, 26%);
+  /* --Dark-violet-background: hsl(281, 89%, 26%); */
+  --key-set-shadow: hsl(285, 91%, 52%);
+  /* --Vivid-magenta-shadow: hsl(285, 91%, 52%); */
+
+  --key-toggle-background: hsl(176, 100%, 44%);
+  /* --Pure-cyan-shadow: hsl(176, 100%, 44%); */
+  --key-toggle-shadow: hsl(177, 92%, 70%);
+  /* --Soft-cyan-shadow: hsl(177, 92%, 70%); */
+
+  --key-number-background: hsl(268, 47%, 21%);
+  /* --Very-dark-violet-background: hsl(268, 47%, 21%); */
+  --key-number-shadow: hsl(290, 70%, 36%);
+  /* --Dark-magenta-shadow: hsl(290, 70%, 36%); */
+
+  --Text: hsl(52, 100%, 62%);
+
+  --Text-shadow: hsl(198, 20%, 13%);
+
+  /* --Light-yellow-text: hsl(52, 100%, 62%); */
+  /* --Very-dark-blue-text: hsl(198, 20%, 13%); */
+  /* (text) */
+  --White: hsl(0, 0%, 100%);
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  flex-direction: column;
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  padding: 3rem;
+  background-color: var(--main-background);
+}
+
+.container {
+  /* outline: 1px solid red; */
+  width: 90%;
+  margin: auto;
+  min-width: 300px;
+  max-width: 330px;
+  min-height: 500px;
+}
+
+.theme-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.theme-control {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.logo {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--Text);
+}
+
+.theme-title {
+  color: var(--Text);
+  margin-top: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+}
+
+label {
+  text-align: center;
+  color: var(--Text);
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+input {
+  display: block;
+}
+
+.input-child-container {
+  background-color: var(--toggle-keypad-background);
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.input-child-container.input-start {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+.input-child-container.input-end {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.input-container {
+  display: flex;
+}
+
+.custom-radio {
+  appearance: none;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-radio:checked {
+  background-color: var(--key-toggle-background);
+}
+
+.output-container {
+  width: 100%;
+  height: 10rem;
+  /* outline: 1px solid red; */
+  margin-top: 1rem;
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: var(--screen-background);
+  text-align: right;
+  font-size: 5rem;
+  font-weight: 400;
+  color: var(--Text);
+  display: flex;
+  justify-content: end;
+}
+
+.keys-container {
+  background-color: var(--toggle-keypad-background);
+  width: 100%;
+  height: 100%;
+  margin-top: 2rem;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 60px);
+  grid-template-areas:
+    "pale-7 pale-8 pale-9 sign-delete"
+    "pale-4 pale-5 pale-6 pale-add"
+    "pale-1 pale-2 pale-3 pale-subtract"
+    "pale-dot pale-zero pale-devide pale-multiply"
+    "sign-reset sign-reset set-equals set-equals";
+  gap: 2rem;
+  border-radius: 0.5rem;
+}
+
+.pale,
+.set,
+.sign {
+  text-align: center;
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.pale {
+  color: var(--Text);
+  background-color: var(--key-number-background);
+  box-shadow: inset 1px -7px 2px -2px var(--key-number-shadow);
+}
+
+.sign {
+  color: var(--Text);
+  background-color: var(--key-set-background);
+  box-shadow: inset 1px -7px 2px -2px var(--key-set-shadow);
+}
+
+.set {
+  color: var(--Text);
+  background-color: var(--key-toggle-background);
+  box-shadow: inset 1px -7px 2px -2px var(--key-toggle-shadow);
+}
+
+.pale-number {
+  color: hsl(221, 14%, 31%);
+}
+
+.pale-1 {
+  grid-area: pale-1;
+}
+
+.pale-2 {
+  grid-area: pale-2;
+}
+
+.pale-3 {
+  grid-area: pale-3;
+}
+
+.pale-4 {
+  grid-area: pale-4;
+}
+
+.pale-5 {
+  grid-area: pale-5;
+}
+
+.pale-6 {
+  grid-area: pale-6;
+}
+
+.pale-7 {
+  grid-area: pale-7;
+}
+
+.pale-8 {
+  grid-area: pale-8;
+}
+
+.pale-9 {
+  grid-area: pale-9;
+}
+
+.pale-zero {
+  grid-area: pale-zero;
+}
+
+.pale-dot {
+  grid-area: pale-dot;
+}
+
+.pale-devide {
+  grid-area: pale-devide;
+}
+
+.pale-multiply {
+  grid-area: pale-multiply;
+}
+
+.pale-add {
+  grid-area: pale-add;
+}
+
+.pale-subtract {
+  grid-area: pale-subtract;
+}
+
+.set-equals {
+  grid-area: set-equals;
+}
+
+.sign-delete {
+  grid-area: sign-delete;
+}
+
+.sign-reset {
+  grid-area: sign-reset;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 540px;
+  }
+}
