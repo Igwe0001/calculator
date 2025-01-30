@@ -1,150 +1,18 @@
-class Calculator {
-  constructor(previousOperandTextElement, currentOperandTextElement) {
-    this.previousOperandTextElement = previousOperandTextElement;
-    this.currentOperandTextElement = currentOperandTextElement;
-    this.clear();
-  }
-
-  clear() {
-    this.currentOperand = "";
-    this.previousOperand = "";
-    this.operation = undefined;
-  }
-
-  delete() {
-    this.currentOperand = this.currentOperand.toString().slice(0, -1);
-  }
-
-  appendNuber(number) {
-    if (number === "." && this.currentOperand.includes(".")) return;
-    this.currentOperand = this.currentOperand.toString() + number.toString();
-  }
-
-  chooseOperation(operation) {
-    if (this.currentOperand === "") return;
-    if (this.previousOperand !== "") {
-      this.compute();
-    }
-    this.operation = operation;
-    this.previousOperand = this.currentOperand;
-    this.currentOperand = "";
-  }
-
-  compute() {
-    let computation;
-    const prev = parseFloat(this.previousOperand);
-    const current = parseFloat(this.currentOperand);
-    if (isNaN(prev) || isNaN(current)) return;
-    switch (this.operation) {
-      case "+":
-        computation = prev + current;
-        break;
-      case "-":
-        computation = prev - current;
-        break;
-      case "*":
-        computation = prev * current;
-        break;
-      case "/":
-        computation = prev / current;
-        break;
-      default:
-        return;
-    }
-
-    this.currentOperand = computation;
-    this.operation = undefined;
-    this.previousOperand = "";
-  }
-
-  getDisplayNumber(number) {
-    const stringNumber = number.toString();
-    const integerDigits = parseFloat(stringNumber.split(".")[0]);
-    const decimalDigits = stringNumber.split(".")[1];
-    let integerDisplay;
-    if (isNaN(integerDigits)) {
-      integerDisplay = "";
-    } else {
-      integerDisplay = integerDigits.toLocaleString("en", {
-        maximumFractionDigits: 0,
-      });
-    }
-    if (decimalDigits != null) {
-      return `${integerDisplay}.${decimalDigits}`;
-    } else {
-      return integerDisplay;
-    }
-  }
-  
-  updateDisplay() {
-    this.currentOperandTextElement.innerText = this.getDisplayNumber(
-      this.currentOperand
-    );
-    // this.previousOperandTextElement.innerText = this.previousOperand;
-    if (this.operation != null && this.previousOperand !== "") {
-      this.previousOperandTextElement.innerText = `${this.getDisplayNumber(
-        this.previousOperand
-      )}${this.operation}`;
-    } else {
-      this.previousOperandTextElement.innerText = ""; // Clear previous operand if no operation is selected
-    }
-  }
-}
-
 const input = document.querySelectorAll("input");
 const pale = document.querySelectorAll(".pale");
 
-const numberButtons = document.querySelectorAll("[data-number]");
-const operationButtons = document.querySelectorAll("[data-operations]");
-const equalsButton = document.querySelector("[data-equals]");
-const deleteButton = document.querySelector("[data-delete]");
-const resetButton = document.querySelector("[data-reset]");
-const previousOperandTextElement = document.querySelector(
-  "[data-previous-operand]"
-);
-const currentOperandTextElement = document.querySelector(
-  "[data-current-operand]"
-);
+const keys = document.querySelector(".keys-container");
 
-const calculator = new Calculator(
-  previousOperandTextElement,
-  currentOperandTextElement
-);
-
-numberButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    calculator.appendNuber(button.innerText);
-    calculator.updateDisplay();
-  });
-});
-
-operationButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    calculator.chooseOperation(button.innerText);
-    calculator.updateDisplay();
-  });
-});
-
-equalsButton.addEventListener("click", (button) => {
-  calculator.compute();
-  calculator.updateDisplay();
-});
-
-resetButton.addEventListener("click", (button) => {
-  calculator.clear();
-  calculator.updateDisplay();
-});
-
-deleteButton.addEventListener("click", (button) => {
-  calculator.delete();
-  calculator.updateDisplay();
-});
+const previous = document.querySelector("[data-previous-operand]");
+const current = document.querySelector("[data-current-operand]");
+const sign = document.querySelector("[data-sign]");
 
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme) {
   document.documentElement.setAttribute("data-theme", savedTheme);
 }
 
+// Theme change
 input.forEach((e) =>
   e.addEventListener("click", () => {
     let newTheme;
@@ -169,3 +37,155 @@ input.forEach((e) =>
     localStorage.setItem("theme", newTheme);
   })
 );
+
+// Add comma logic
+function addCommas(num) {
+  // Split the number into integer and decimal parts
+  let [integerPart, decimalPart] = num.split(".");
+
+  // Add commas to the integer part
+  integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+  // If there's a decimal part, append it back
+  if (num.includes(".")) {
+    return integerPart + "." + decimalPart;
+  }
+  return integerPart;
+}
+
+// Delete number
+function deleted(str) {
+  return str.slice(0, -1);
+}
+
+// Calculate
+function calculate(n1, operator, n2) {
+  let result = "";
+
+  if (operator === "" || n2.length === "") return;
+
+  if (operator === "add") {
+    result = parseFloat(n1) + parseFloat(n2);
+  } else if (operator === "subtract") {
+    result = parseFloat(n1) - parseFloat(n2);
+  } else if (operator === "multiply") {
+    result = parseFloat(n1) * parseFloat(n2);
+  } else if (operator === "divide") {
+    result = parseFloat(n1) / parseFloat(n2);
+  }
+
+  return result;
+}
+
+// Event delegation
+keys.addEventListener("click", (e) => {
+  if (e.target.matches("button")) {
+    const key = e.target;
+    const action = key.dataset.action;
+    const keyContent = key.textContent;
+    let displayedNum = previous.textContent;
+    let currentNum = current.textContent;
+
+    // Remove commas for calculation
+    displayedNum = displayedNum.replace(/,/g, "");
+    currentNum = currentNum.replace(/,/g, "");
+
+    if (!action) {
+      if (displayedNum === "0") {
+        previous.textContent = keyContent;
+      } else if (displayedNum.length <= 6) {
+        previous.textContent = displayedNum + keyContent;
+      }
+    }
+
+    if (!action) {
+      if (previous.textContent !== "0" && sign.textContent !== "") {
+        previous.textContent = displayedNum;
+        if (currentNum.length <= 6) {
+          current.textContent = currentNum + keyContent;
+        }
+      }
+    }
+
+    if (action === "decimal") {
+      if (!displayedNum.includes(".")) {
+        if (previous.textContent === "0") {
+          previous.textContent = displayedNum + ".";
+        } else if (previous.textContent !== "") {
+          previous.textContent = displayedNum + ".";
+        }
+      }
+
+      if (sign.textContent !== "") {
+        if (displayedNum.includes(".") === false) {
+          previous.textContent = displayedNum;
+        }
+        if (!currentNum.includes(".")) {
+          if (current.textContent !== "") {
+            current.textContent = currentNum + ".";
+          } else {
+            current.textContent = currentNum + "0.";
+          }
+        }
+      }
+    }
+
+    let firstValue = displayedNum;
+    let operator = sign.dataset.operator;
+    let secondValue = currentNum;
+
+    if (
+      action === "add" ||
+      action === "subtract" ||
+      action === "multiply" ||
+      action === "divide"
+    ) {
+      sign.textContent = key.textContent;
+      sign.dataset.operator = action;
+      if (previous.textContent === "0") {
+        sign.textContent = "";
+      }
+
+      if (
+        previous.textContent !== "" &&
+        sign.textContent !== "" &&
+        current.textContent !== ""
+      ) {
+        previous.textContent = calculate(firstValue, operator, secondValue);
+        current.textContent = "";
+      }
+    }
+
+    if (action === "calculate") {
+      if (sign.textContent === "" || current.textContent === "") {
+        previous.textContent = displayedNum;
+      } else {
+        previous.textContent = calculate(firstValue, operator, secondValue);
+        sign.textContent = "";
+        current.textContent = "";
+      }
+    }
+
+    if (action === "reset") {
+      previous.textContent = "0";
+      current.textContent = "";
+      sign.textContent = "";
+    }
+
+    if (action === "delete") {
+      if (current.textContent !== "") {
+        current.textContent = deleted(secondValue);
+      } else if (sign.textContent !== "" && current.textContent === "") {
+        sign.textContent = "";
+      } else if (sign.textContent === "" && current.textContent === "") {
+        previous.textContent = deleted(displayedNum);
+        if (previous.textContent === "") {
+          previous.textContent = "0";
+        }
+      }
+    }
+
+    previous.textContent = addCommas(previous.textContent);
+    current.textContent = addCommas(current.textContent);
+  }
+});
