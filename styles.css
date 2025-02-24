@@ -25,18 +25,21 @@
   --key-set-shadow: hsl(224, 28%, 35%);
   /* --Desaturated-dark-blue-shadow: hsl(224, 28%, 35%); */
   --key-set-hover: hsla(225, 21%, 49%, 0.9);
+  --key-set-background-hover: hsl(225, 21%, 69%);
 
   --key-toggle-background: hsl(6, 63%, 50%);
   /* --Red-background: hsl(6, 63%, 50%); */
   --key-toggle-shadow: hsl(6, 70%, 34%);
   /* --Dark-red-shadow: hsl(6, 70%, 34%); */
   --key-toggle-hover: hsla(6, 63%, 50%, 0.8);
+  --key-toggle-background-hover: hsl(6, 63%, 60%);
 
   --key-number-background: hsl(30, 25%, 89%);
   /* --Light-grayish-orange-background: hsl(30, 25%, 89%); */
   --key-number-shadow: hsl(28, 16%, 65%);
   /* --Grayish-orange-shadow: hsl(28, 16%, 65%); */
-  --key-number-hover: hsla(45, 7%, 89%, 0.1);
+  --key-number-hover: hsl(45, 7%, 89%);
+  --key-number-background-hover: hsl(30, 25%, 99%);
 
   --Text: hsl(0, 0%, 100%);
 
@@ -63,16 +66,19 @@
   /* --Dark-moderate-cyan-background: hsl(185, 42%, 37%); */
   --key-set-shadow: hsl(185, 58%, 25%);
   /* --Very-dark-cyan-shadow: hsl(185, 58%, 25%); */
+  --key-set-background-hover: hsl(185, 42%, 67%);
 
   --key-toggle-background: hsl(25, 98%, 40%);
   /* --Orange-background: hsl(25, 98%, 40%); */
   --key-toggle-shadow: hsl(25, 99%, 27%);
   /* --Dark-orange-shadow: hsl(25, 99%, 27%); */
+  --key-toggle-background-hover:hsl(25, 98%, 60%);
 
   --key-number-background: hsl(45, 7%, 89%);
   /* --Light-grayish-yellow-background: hsl(45, 7%, 89%); */
   --key-number-shadow: hsl(35, 11%, 61%);
   /* --Dark-grayish-orange-shadow: hsl(35, 11%, 61%); */
+  --key-number-background-hover: hsl(45, 7%, 99%);
 
   --Text: hsl(60, 10%, 19%);
 
@@ -99,16 +105,19 @@
   /* --Dark-violet-background: hsl(281, 89%, 26%); */
   --key-set-shadow: hsl(285, 91%, 52%);
   /* --Vivid-magenta-shadow: hsl(285, 91%, 52%); */
+  --key-set-background-hover: hsl(281, 89%, 46%);
 
   --key-toggle-background: hsl(176, 100%, 44%);
   /* --Pure-cyan-shadow: hsl(176, 100%, 44%); */
   --key-toggle-shadow: hsl(177, 92%, 70%);
   /* --Soft-cyan-shadow: hsl(177, 92%, 70%); */
+  --key-toggle-background-hover: hsl(176, 100%, 64%);
 
   --key-number-background: hsl(268, 47%, 21%);
   /* --Very-dark-violet-background: hsl(268, 47%, 21%); */
   --key-number-shadow: hsl(290, 70%, 36%);
   /* --Dark-magenta-shadow: hsl(290, 70%, 36%); */
+  --key-number-background-hover: hsl(268, 47%, 49%);
 
   --Text: hsl(52, 100%, 62%);
 
@@ -278,7 +287,7 @@ button {
 }
 
 .pale:hover {
-  background-color: var(--White);
+  background-color: var(--key-number-background-hover);
 }
 
 .sign {
@@ -287,12 +296,18 @@ button {
   box-shadow: inset 1px -7px 2px -2px var(--key-set-shadow);
 }
 
-
+.sign:hover {
+  background-color: var(--key-set-background-hover);
+}
 
 .set {
   color: var(--Text);
   background-color: var(--key-toggle-background);
   box-shadow: inset 1px -7px 2px -2px var(--key-toggle-shadow);
+}
+
+.set:hover {
+  background-color: var(--key-toggle-background-hover);
 }
 
 .pale-number {
